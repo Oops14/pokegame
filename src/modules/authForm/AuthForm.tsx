@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+
 import clsx from 'clsx'
 
 import { BaseInput } from '@/ui/baseInput/BaseInput.tsx'
@@ -12,6 +14,8 @@ const AuthForm = () => {
   const [password, setPassword] = useState('')
   const [passwordConfirm, setPasswordConfirm] = useState('')
   const [error, setError] = useState('')
+
+  const navigate = useNavigate()
 
   const handleSignUp = () => {
     if (!login || !password || !passwordConfirm) {
@@ -36,6 +40,8 @@ const AuthForm = () => {
     if (storedUser.login === login && storedUser.password === password) {
       setError('')
       alert('Login successful!')
+
+      navigate('/')
     } else {
       setError('Invalid login or password.')
     }
