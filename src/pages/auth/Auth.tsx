@@ -1,7 +1,7 @@
 import AuthForm from '@/modules/authForm/AuthForm.tsx'
 
-import logo1 from '../../assets/images/poke_1.svg'
-import logo2 from '../../assets/images/poke_2.svg'
+import logo1 from '@/assets/images/poke_1.svg'
+import logo2 from '@/assets/images/poke_2.svg'
 
 import { Container } from '@/shared/container/Container'
 
