@@ -5,6 +5,7 @@ import coin from '@/assets/images/coins/coin.svg'
 import { Container } from '@/shared/container/Container'
 
 import s from './Header.module.scss'
+import Typography from '@/ui/typography/Typography'
 
 export const Header = () => {
   return (
@@ -21,7 +22,7 @@ export const Header = () => {
           </div>
           <div className={s.header_main__inner__coins}>
             <img src={coin} alt="coins" />
-            <span className={s.coins_amount}>100 000 000</span>
+            <Typography tag="h4">100 000 000</Typography>
           </div>
         </div>
       </Container>

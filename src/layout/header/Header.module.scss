@@ -29,19 +29,6 @@
   }
 }
 
-.coins_amount {
-  color: #ffcc01;
-
-  text-shadow:
-    -1px -1px 0px blue,
-    /* Top-left shadow */ 1px -1px 0px blue,
-    /* Top-right shadow */ -1px 1px 0px blue,
-    /* Bottom-left shadow */ 1px 1px 0px blue; /* Bottom-right shadow */
-
-  font-weight: 700;
-  font-size: 24px;
-}
-
 .header_main__inner__coins {
   display: flex;
   align-items: center;
