@@ -4,8 +4,9 @@ import coin from '@/assets/images/coins/coin.svg'
 
 import { Container } from '@/shared/container/Container'
 
-import s from './Header.module.scss'
 import Typography from '@/ui/typography/Typography'
+
+import s from './Header.module.scss'
 
 export const Header = () => {
   return (

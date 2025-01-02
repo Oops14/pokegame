@@ -2,8 +2,9 @@ import { FC, ReactNode } from 'react'
 
 import arrow_down from '@/assets/images/arrows/arrow_down.svg'
 
-import s from './Accordion.module.scss'
 import Typography from '@/ui/typography/Typography'
+
+import s from './Accordion.module.scss'
 
 interface AccordionProps {
   children: ReactNode
