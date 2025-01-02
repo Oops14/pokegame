@@ -3,6 +3,9 @@ import { useNavigate } from 'react-router-dom'
 
 import clsx from 'clsx'
 
+import { useAppDispatch } from '@/store/store'
+import { setIsLoggedInAC } from '@/store/reducers/authReducer'
+
 import { BaseInput } from '@/ui/baseInput/BaseInput.tsx'
 import { BaseButton } from '@/ui/baseButton/BaseButton'
 
@@ -14,6 +17,8 @@ const AuthForm = () => {
   const [password, setPassword] = useState('')
   const [passwordConfirm, setPasswordConfirm] = useState('')
   const [error, setError] = useState('')
+
+  const dispatch = useAppDispatch()
 
   const navigate = useNavigate()
 
@@ -40,6 +45,8 @@ const AuthForm = () => {
     if (storedUser.login === login && storedUser.password === password) {
       setError('')
       alert('Login successful!')
+
+      dispatch(setIsLoggedInAC(isLogin))
 
       navigate('/')
     } else {
