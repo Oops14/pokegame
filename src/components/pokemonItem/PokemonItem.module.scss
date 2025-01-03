@@ -1,0 +1,28 @@
+.pokemon_item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  padding: 10px;
+
+  box-shadow: 0 0 16px 0 #3a3a3a1a;
+  border-radius: 16px;
+
+  transition: all .2s linear;
+
+  &:hover {
+    box-shadow: 0 0 16px 0 rgb(21 20 20 / 32%);
+  }
+}
+
+.top_panel,
+.weight,
+.money {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  > span:first-child {
+    font-weight: 700;
+  }
+}
