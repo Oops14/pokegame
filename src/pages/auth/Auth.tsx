@@ -22,7 +22,7 @@ export const Auth = () => {
     if (isInitialized) {
       navigate('/')
     }
-  }, [isInitialized])
+  }, [isInitialized, navigate])
 
   return (
     <section className={s.auth_section}>

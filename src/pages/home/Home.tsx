@@ -14,6 +14,12 @@ import Typography from '@/ui/typography/Typography'
 import s from './Home.module.scss'
 import { Accordion } from '@/components/accordion/Accordion'
 
+const accordions = [
+  { id: 1, title: "My Pokemon's" },
+  { id: 2, title: 'Garden' },
+  { id: 3, title: 'Hunt' },
+]
+
 export const Home = () => {
   const isInitialized = useSelector<AppRootStateType, boolean>((state) => state.auth.isLoggedIn)
 
@@ -23,7 +29,7 @@ export const Home = () => {
     if (!isInitialized) {
       navigate('/auth')
     }
-  }, [isInitialized])
+  }, [isInitialized, navigate])
 
   return (
     <>
@@ -35,9 +41,9 @@ export const Home = () => {
               <Typography tag="h4">Inventory</Typography>
             </div>
             <main className={s.main_content}>
-              <Accordion>My Pokemons</Accordion>
-              <Accordion>Garden</Accordion>
-              <Accordion>Hunt</Accordion>
+              {accordions.map((i) => {
+                return <Accordion key={i.id}>{i.title}</Accordion>
+              })}
             </main>
             <div className={s.right_sidebar}>
               <Typography tag="h4">Shop</Typography>
