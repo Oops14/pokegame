@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 
 import settings_icon from '@/assets/images/pokemon/setting.svg'
 
@@ -15,17 +15,19 @@ interface PokemonItemProps {
 export const PokemonItem: FC<PokemonItemProps> = ({ title }) => {
   const [pokemonData, setPokemonData] = useState<specificCard>()
 
-  useState(async () => {
+  useEffect(() => {
     const getSpecificPokemonInfo = async (title: string) => {
       try {
         const data = await pokemonInfo(title)
+        console.log(data)
+
         setPokemonData(data)
       } catch (err) {
         console.log(err)
       }
     }
 
-    await getSpecificPokemonInfo(title)
+    getSpecificPokemonInfo(title)
   }, [title])
 
   return (

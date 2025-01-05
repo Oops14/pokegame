@@ -39,7 +39,8 @@ export const Home = () => {
   useEffect(() => {
     const getPokemons = async () => {
       try {
-        const data = await fetchPokemons(8)
+        const data = await fetchPokemons(2)
+
         dispatch(setPokemonAC(data.results))
       } catch (err) {
         console.log(err)
