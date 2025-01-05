@@ -3,25 +3,30 @@ import { useNavigate } from 'react-router-dom'
 
 import { useSelector } from 'react-redux'
 
+import { accordions } from '@/pages/home/data.ts'
+
+import { Accordion } from '@/components/accordion/Accordion'
+
 import { Header } from '@/layout/header/Header'
+
+import { fetchPokemons } from '@/services/api.ts'
 
 import { Container } from '@/shared/container/Container'
 
-import { AppRootStateType } from '@/store/store'
+import { AppRootStateType, useAppDispatch } from '@/store/store'
+import { setPokemonAC } from '@/store/reducers/pokemonReducer.ts'
+
+import { Pokemon } from '@/utils/types/apiTypes/apiTypes.ts'
 
 import Typography from '@/ui/typography/Typography'
 
 import s from './Home.module.scss'
-import { Accordion } from '@/components/accordion/Accordion'
-
-const accordions = [
-  { id: 1, title: "My Pokemon's" },
-  { id: 2, title: 'Garden' },
-  { id: 3, title: 'Hunt' },
-]
 
 export const Home = () => {
   const isInitialized = useSelector<AppRootStateType, boolean>((state) => state.auth.isLoggedIn)
+  const pokemons = useSelector<AppRootStateType, Pokemon[]>((state) => state.pokemon.pokemon)
+
+  const dispatch = useAppDispatch()
 
   const navigate = useNavigate()
 
@@ -30,6 +35,20 @@ export const Home = () => {
       navigate('/auth')
     }
   }, [isInitialized, navigate])
+
+  useEffect(() => {
+    const getPokemons = async () => {
+      try {
+        const data = await fetchPokemons(2)
+
+        dispatch(setPokemonAC(data.results))
+      } catch (err) {
+        console.log(err)
+      }
+    }
+
+    getPokemons()
+  }, [])
 
   return (
     <>
@@ -42,7 +61,11 @@ export const Home = () => {
             </div>
             <main className={s.main_content}>
               {accordions.map((i) => {
-                return <Accordion key={i.id}>{i.title}</Accordion>
+                return (
+                  <Accordion key={i.id} id={i.id} pokemons={pokemons}>
+                    {i.title}
+                  </Accordion>
+                )
               })}
             </main>
             <div className={s.right_sidebar}>

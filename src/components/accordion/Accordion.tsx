@@ -1,18 +1,25 @@
 import { FC, ReactNode, useState } from 'react'
 
+import clsx from 'clsx'
+
 import arrow_down from '@/assets/images/arrows/arrow_down.svg'
 import arrow_top from '@/assets/images/arrows/arrow_top.svg'
+
+import { PokemonItem } from '@/components/pokemonItem/PokemonItem.tsx'
+
+import { Pokemon } from '@/utils/types/apiTypes/apiTypes.ts'
 
 import Typography from '@/ui/typography/Typography'
 
 import s from './Accordion.module.scss'
-import clsx from 'clsx'
 
 interface AccordionProps {
   children: ReactNode
+  id: number
+  pokemons: Pokemon[]
 }
 
-export const Accordion: FC<AccordionProps> = ({ children }) => {
+export const Accordion: FC<AccordionProps> = ({ children, id, pokemons }) => {
   const [isOpen, setIsOpen] = useState(false)
 
   const handleOpen = () => {
@@ -27,7 +34,14 @@ export const Accordion: FC<AccordionProps> = ({ children }) => {
           {isOpen ? <img src={arrow_top} alt="arrow top" /> : <img src={arrow_down} alt="arrow down" />}
         </div>
       </div>
-      <div className={clsx(s.accordion__bottom_content, { [s.opened]: isOpen })}></div>
+      <div className={clsx(s.accordion__bottom_content, { [s.opened]: isOpen })}>
+        <div className={s.grid_pokemons}>
+          {id === 1 &&
+            pokemons.map((i, indx) => {
+              return <PokemonItem key={indx} title={i.name} />
+            })}
+        </div>
+      </div>
     </div>
   )
 }
