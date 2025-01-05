@@ -8,7 +8,7 @@ export type setMoneyACType = ReturnType<typeof setMoneyAC>
 
 const pokemonInitialState = {
   pokemon: [],
-  money: 0,
+  money: 2000,
 }
 
 export type pokemonInitialStateType = {

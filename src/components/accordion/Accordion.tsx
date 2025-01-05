@@ -35,7 +35,7 @@ export const Accordion: FC<AccordionProps> = ({ children, id, pokemons }) => {
         </div>
       </div>
       <div className={clsx(s.accordion__bottom_content, { [s.opened]: isOpen })}>
-        <div className={s.grid_pokemons}>
+        <div className={clsx(s.grid_pokemons, { [s.show_grid]: isOpen })}>
           {id === 1 &&
             pokemons.map((i, indx) => {
               return <PokemonItem key={indx} title={i.name} />

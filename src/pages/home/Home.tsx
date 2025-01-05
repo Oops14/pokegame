@@ -14,7 +14,7 @@ import { fetchPokemons } from '@/services/api.ts'
 import { Container } from '@/shared/container/Container'
 
 import { AppRootStateType, useAppDispatch } from '@/store/store'
-import { setMoneyAC, setPokemonAC } from '@/store/reducers/pokemonReducer.ts'
+import { setPokemonAC } from '@/store/reducers/pokemonReducer.ts'
 
 import { Pokemon } from '@/utils/types/apiTypes/apiTypes.ts'
 
