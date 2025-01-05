@@ -1,3 +1,5 @@
+import { FC } from 'react'
+
 import logo1 from '@/assets/images/poke_1.svg'
 import logo2 from '@/assets/images/poke_2.svg'
 import coin from '@/assets/images/coins/coin.svg'
@@ -8,7 +10,11 @@ import Typography from '@/ui/typography/Typography'
 
 import s from './Header.module.scss'
 
-export const Header = () => {
+interface HeaderProps {
+  amount: number
+}
+
+export const Header: FC<HeaderProps> = ({ amount }) => {
   return (
     <div className={s.header_main}>
       <Container>
@@ -23,7 +29,7 @@ export const Header = () => {
           </div>
           <div className={s.header_main__inner__coins}>
             <img src={coin} alt="coins" />
-            <Typography tag="h4">100 000 000</Typography>
+            <Typography tag="h4">{amount}</Typography>
           </div>
         </div>
       </Container>

@@ -5,7 +5,7 @@ import clsx from 'clsx'
 import arrow_down from '@/assets/images/arrows/arrow_down.svg'
 import arrow_top from '@/assets/images/arrows/arrow_top.svg'
 
-import { PokemonItem } from '@/components/pokemonItem/PokemonItem.tsx'
+import PokemonItem from '@/components/pokemonItem/PokemonItem.tsx'
 
 import { Pokemon } from '@/utils/types/apiTypes/apiTypes.ts'
 

@@ -14,7 +14,7 @@ import { fetchPokemons } from '@/services/api.ts'
 import { Container } from '@/shared/container/Container'
 
 import { AppRootStateType, useAppDispatch } from '@/store/store'
-import { setPokemonAC } from '@/store/reducers/pokemonReducer.ts'
+import { setMoneyAC, setPokemonAC } from '@/store/reducers/pokemonReducer.ts'
 
 import { Pokemon } from '@/utils/types/apiTypes/apiTypes.ts'
 
@@ -25,9 +25,9 @@ import s from './Home.module.scss'
 export const Home = () => {
   const isInitialized = useSelector<AppRootStateType, boolean>((state) => state.auth.isLoggedIn)
   const pokemons = useSelector<AppRootStateType, Pokemon[]>((state) => state.pokemon.pokemon)
+  const moneyAmount = useSelector<AppRootStateType, number>((state) => state.pokemon.money)
 
   const dispatch = useAppDispatch()
-
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -52,7 +52,7 @@ export const Home = () => {
 
   return (
     <>
-      <Header />
+      <Header amount={moneyAmount} />
       <section className={s.main_home}>
         <Container>
           <div className={s.grid_main}>
