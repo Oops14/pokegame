@@ -53,3 +53,29 @@
   opacity: 1 !important;
   visibility: visible !important;
 }
+
+// =================
+// GARDEN ACCORDION
+// =================
+
+.grid_main_garden {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  grid-template-rows: 1fr;
+  // grid-column-gap: 0px;
+  // grid-row-gap: 0px;
+}
+
+.grid_garden {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(7, 1fr);
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+
+  > div {
+    height: 48px;
+    width: 48px;
+    background-color: #fafafa;
+  }
+}
