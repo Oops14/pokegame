@@ -1,3 +1,7 @@
+import { Dispatch } from 'react'
+
+import { fetchPokemons } from '@/services/api.ts'
+
 import { Pokemon } from '@/utils/types/apiTypes/apiTypes.ts'
 
 const SET_POKEMON = 'pokemon/SET-POKEMON'
@@ -33,6 +37,16 @@ export const pokemonReducer = (
 // actions
 export const setPokemonAC = (pokemons: Pokemon[]) => ({ type: SET_POKEMON, payload: { pokemons } }) as const
 export const setMoneyAC = (amount: number) => ({ type: SET_MONEY, payload: { amount } }) as const
+
+// thunks.
+export const setPokemonTC = (count: number) => async (dispatch: Dispatch<any>) => {
+  try {
+    const res = await fetchPokemons(count)
+    dispatch(setPokemonAC(res.results))
+  } catch (e) {
+    console.error('Error fetching Pokémon:', e)
+  }
+}
 
 // types
 type PokemonActionsType = setPokemonACType | setMoneyACType

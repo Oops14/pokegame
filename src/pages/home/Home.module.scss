@@ -20,3 +20,86 @@
   box-shadow: 0px 0px 16px 0px #3a3a3a1a;
   border-radius: 16px;
 }
+
+// ACCORDION
+.accordion {
+  padding: 15px;
+
+  box-shadow: 0 0 16px 0 #3a3a3a1a;
+  border-radius: 16px;
+
+  cursor: pointer;
+
+  margin-bottom: 20px;
+}
+
+.accordion__top_content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.opened {
+  height: 100% !important;
+  margin-top: 15px;
+  min-height: 400px !important;
+
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.accordion__bottom_content {
+  height: 0;
+  min-height: 0;
+
+  opacity: 0;
+  visibility: hidden;
+
+  transition: all 0.2s linear;
+}
+
+.grid_pokemons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+
+  opacity: 0;
+  visibility: hidden;
+  transition:
+          opacity 0.3s ease,
+          visibility 0.3s ease;
+  height: 0;
+}
+
+.show_grid {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+// =================
+// GARDEN ACCORDION
+// =================
+
+.grid_main_garden {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  grid-template-rows: 1fr;
+  // grid-column-gap: 0px;
+  // grid-row-gap: 0px;
+}
+
+.grid_garden {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(7, 1fr);
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+
+  > div {
+    height: 48px;
+    width: 48px;
+    background-color: #fafafa;
+  }
+}

@@ -1,5 +1,3 @@
-import { Dispatch } from 'redux'
-
 import { setAppErrorACType, setLoaderACType } from './appReducer'
 
 const LOGIN = 'login/SET-IS-LOGGED-IN'
@@ -29,10 +27,6 @@ export const authReducer = (
 
 // actions
 export const setIsLoggedInAC = (value: boolean) => ({ type: LOGIN, payload: { value } }) as const
-
-export const loginAC = (dispatch: Dispatch<AuthActionsType>) => {
-  dispatch(setIsLoggedInAC(true))
-}
 
 export const logoutAC = () => {
   localStorage.removeItem('isLoggedIn')
