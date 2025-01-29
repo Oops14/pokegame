@@ -1,0 +1,30 @@
+.grid_garden {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(7, 1fr);
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+
+  > div {
+    height: 48px;
+    width: 48px;
+    background-color: #fafafa;
+  }
+}
+
+.cell:hover {
+  background-color: #e0f7fa;
+}
+
+.barberry_grow {
+  animation: grow 0.5s ease-in-out;
+}
+
+@keyframes grow {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
