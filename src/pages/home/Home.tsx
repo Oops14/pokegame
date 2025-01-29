@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 
 import clsx from 'clsx'
 
-import { accordions } from '@/pages/home/data.ts'
+import { accordions, gardenOptions } from '@/pages/home/data.ts'
 
 import PokemonItem from '@/modules/pokemon/pokemonItem/PokemonItem.tsx'
 
@@ -26,6 +26,8 @@ import { ACCORDION } from '@/utils/enums/accordionEnum/accordionEnum.ts'
 import Typography from '@/ui/typography/Typography'
 
 import s from './Home.module.scss'
+import { BaseButton } from '@/ui/baseButton/BaseButton'
+import CoinAmount from '@/shared/coinAmount/CoinAmount'
 
 export const Home = () => {
   const [rows, setRows] = useState(7)
@@ -83,14 +85,17 @@ export const Home = () => {
                       </div>
                     </div>
                     <div className={clsx(s.accordion__bottom_content, { [s.opened]: openAccordions[index] })}>
-                      <div className={clsx(s.grid_pokemons, { [s.show_grid]: openAccordions[index] })}>
-                        {i.id === ACCORDION.MY_POKEMONS &&
-                          pokemons.map((i, indx) => {
-                            return <PokemonItem key={indx} title={i.name} />
-                          })}
+                      <div>
+                        {i.id === ACCORDION.MY_POKEMONS && (
+                          <div className={clsx(s.grid_pokemons, { [s.show_grid]: openAccordions[index] })}>
+                            {pokemons.map((i, indx) => {
+                              return <PokemonItem key={indx} title={i.name} />
+                            })}
+                          </div>
+                        )}
 
                         {i.id === ACCORDION.GARDEN && (
-                          <div className={s.grid_main_garden}>
+                          <div className={clsx(s.grid_main_garden, { [s.show_grid]: openAccordions[index] })}>
                             <div className={s.grid_garden}>
                               <BerryGrid
                                 rows={rows}
@@ -100,6 +105,22 @@ export const Home = () => {
                                   { row: 3, col: 4 },
                                 ]}
                               />
+                            </div>
+                            <div className={s.grid_main_garden__options}>
+                              {gardenOptions.map((i) => {
+                                return (
+                                  <div key={i.id} className={s.grid_main_garden__options__item}>
+                                    <div className={s.grid_main_garden__options__item__top}>
+                                      <Typography baseStyles={true}>{i.title}</Typography>
+                                    </div>
+
+                                    <div className={s.grid_main_garden__options__item__bottom}>
+                                      <BaseButton>Купить</BaseButton>
+                                      <CoinAmount amount={i.price} />
+                                    </div>
+                                  </div>
+                                )
+                              })}
                             </div>
                           </div>
                         )}

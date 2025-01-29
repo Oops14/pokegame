@@ -64,7 +64,7 @@ const BerryGrid = memo(({ rows, cols, berryCells }: BerryGridProps) => {
         display: 'grid',
         gridTemplateRows: `repeat(${rows}, 1fr)`,
         gridTemplateColumns: `repeat(${cols}, 1fr)`,
-        gap: '4px',
+        gap: '13px',
       }}>
       {grid.map((row, rowIndex) =>
         row.map((cell, colIndex) => (

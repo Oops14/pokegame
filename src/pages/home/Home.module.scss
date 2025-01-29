@@ -4,7 +4,7 @@
 
 .grid_main {
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-columns: 0.8fr 2fr 0.8fr;
   grid-template-rows: 1fr;
   grid-column-gap: 20px;
   grid-row-gap: 0px;
@@ -28,8 +28,6 @@
   box-shadow: 0 0 16px 0 #3a3a3a1a;
   border-radius: 16px;
 
-  cursor: pointer;
-
   margin-bottom: 20px;
 }
 
@@ -37,6 +35,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  cursor: pointer;
 }
 
 .opened {
@@ -88,5 +88,33 @@
 .grid_main_garden {
   display: grid;
   grid-template-columns: 1.5fr 1fr;
-  grid-template-rows: 1fr;
+  grid-column-gap: 15px;
+
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+
+  opacity: 0;
+  visibility: hidden;
+  height: 0;
+}
+
+.grid_main_garden__options__item {
+  margin-bottom: 15px;
+}
+
+.grid_main_garden__options__item__top {
+  margin-bottom: 15px;
+}
+
+.grid_main_garden__options__item__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  button {
+    max-width: 78px;
+    border-radius: 3px;
+  }
 }

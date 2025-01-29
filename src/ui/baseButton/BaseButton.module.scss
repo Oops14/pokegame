@@ -6,4 +6,10 @@
   border: none;
 
   padding: 8px 5px;
+
+  transition: all 0.2s linear;
+
+  &:hover {
+    opacity: 0.8;
+  }
 }
