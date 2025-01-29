@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react'
+import { FC, memo, useEffect, useState } from 'react'
 
 import settings_icon from '@/assets/images/pokemon/setting.svg'
 
@@ -15,7 +15,7 @@ interface PokemonItemProps {
   title: string
 }
 
-const PokemonItem: FC<PokemonItemProps> = ({ title }) => {
+const PokemonItem: FC<PokemonItemProps> = memo(({ title }) => {
   const [pokemonData, setPokemonData] = useState<specificCard>()
 
   const dispatch = useAppDispatch()
@@ -69,6 +69,6 @@ const PokemonItem: FC<PokemonItemProps> = ({ title }) => {
       </div>
     </div>
   )
-}
+})
 
 export default PokemonItem

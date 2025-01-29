@@ -4,9 +4,11 @@ import { useSelector } from 'react-redux'
 
 import clsx from 'clsx'
 
+import { accordions } from '@/pages/home/data.ts'
+
 import PokemonItem from '@/modules/pokemon/pokemonItem/PokemonItem.tsx'
 
-import { accordions } from '@/pages/home/data.ts'
+import BerryGrid from '@/components/berryGrid/BerryGrid'
 
 import { Header } from '@/layout/header/Header'
 
@@ -26,6 +28,9 @@ import Typography from '@/ui/typography/Typography'
 import s from './Home.module.scss'
 
 export const Home = () => {
+  const [rows, setRows] = useState(7)
+  const [cols, setCols] = useState(7)
+
   const isInitialized = useSelector<AppRootStateType, boolean>((state) => state.auth.isLoggedIn)
   const pokemons = useSelector<AppRootStateType, Pokemon[]>((state) => state.pokemon.pokemon)
   const moneyAmount = useSelector<AppRootStateType, number>((state) => state.pokemon.money)
@@ -33,26 +38,7 @@ export const Home = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  const rows = 7
-  const cols = 7
-
-  const [grid, setGrid] = useState(
-    Array(rows)
-      .fill(null)
-      .map(() => Array(cols).fill(false))
-  )
-
   const [openAccordions, setOpenAccordions] = useState<boolean[]>(Array(accordions.length).fill(false))
-
-  // Handle growing barberries in a cell
-  const growBarberry = (row: number, col: number) => {
-    // Clone grid state
-    const newGrid = grid.map((r) => [...r])
-
-    // Mark the cell as containing a barberry
-    newGrid[row][col] = true
-    setGrid(newGrid)
-  }
 
   const handleOpen = (index: number) => {
     setOpenAccordions((prev) => {
@@ -85,8 +71,8 @@ export const Home = () => {
             <main className={s.main_content}>
               {accordions.map((i, index) => {
                 return (
-                  <div key={i.id} className={s.accordion} onClick={() => handleOpen(index)}>
-                    <div className={s.accordion__top_content}>
+                  <div key={i.id} className={s.accordion}>
+                    <div className={s.accordion__top_content} onClick={() => handleOpen(index)}>
                       <Typography tag="h4">{i.title}</Typography>
                       <div className={s.accordion__arrow}>
                         {openAccordions[index] ? (
@@ -106,16 +92,14 @@ export const Home = () => {
                         {i.id === ACCORDION.GARDEN && (
                           <div className={s.grid_main_garden}>
                             <div className={s.grid_garden}>
-                              {grid.map((row, rowIndex) =>
-                                row.map((cell, colIndex) => (
-                                  <div
-                                    key={`${rowIndex}-${colIndex}`}
-                                    className={`cell ${cell ? 'barberry' : ''}`}
-                                    onClick={() => growBarberry(rowIndex, colIndex)}>
-                                    {cell && <div className="barberry-icon"></div>}
-                                  </div>
-                                ))
-                              )}
+                              <BerryGrid
+                                rows={rows}
+                                cols={cols}
+                                berryCells={[
+                                  { row: 1, col: 2 },
+                                  { row: 3, col: 4 },
+                                ]}
+                              />
                             </div>
                           </div>
                         )}

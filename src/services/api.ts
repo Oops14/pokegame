@@ -18,3 +18,9 @@ export const pokemonInfo = async (title: string) => {
 
   return res.data
 }
+
+export const getBerries = async () => {
+  const res = await axios.get(`${API_BASE_URL}/item/126/`)
+
+  return res.data
+}
