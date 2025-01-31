@@ -16,22 +16,23 @@ import arrow_top from '@/assets/images/arrows/arrow_top.svg'
 import arrow_down from '@/assets/images/arrows/arrow_down.svg'
 
 import { Container } from '@/shared/container/Container'
+import CoinAmount from '@/shared/coinAmount/CoinAmount'
 
 import { AppRootStateType, useAppDispatch } from '@/store/store'
-import { setPokemonTC } from '@/store/reducers/pokemonReducer.ts'
+import { setMoneyAC, setPokemonTC } from '@/store/reducers/pokemonReducer.ts'
 
 import { Pokemon } from '@/utils/types/apiTypes/apiTypes.ts'
 import { ACCORDION } from '@/utils/enums/accordionEnum/accordionEnum.ts'
 
 import Typography from '@/ui/typography/Typography'
+import { BaseButton } from '@/ui/baseButton/BaseButton'
 
 import s from './Home.module.scss'
-import { BaseButton } from '@/ui/baseButton/BaseButton'
-import CoinAmount from '@/shared/coinAmount/CoinAmount'
 
 export const Home = () => {
-  const [rows, setRows] = useState(7)
-  const [cols, setCols] = useState(7)
+  const [rows] = useState(7)
+  const [cols] = useState(7)
+  const [activeArea, setActiveArea] = useState({ rows: 5, cols: 5 })
 
   const isInitialized = useSelector<AppRootStateType, boolean>((state) => state.auth.isLoggedIn)
   const pokemons = useSelector<AppRootStateType, Pokemon[]>((state) => state.pokemon.pokemon)
@@ -49,6 +50,29 @@ export const Home = () => {
 
       return newOpenAccordions
     })
+  }
+
+  const handleGardenOptionPurchase = (optionId: string, price: number) => {
+    if (moneyAmount < price) {
+      alert('Not enough money!')
+      return
+    }
+
+    if (activeArea.cols === cols || activeArea.rows === rows) {
+      alert('The Garden is fully opened!')
+      return
+    }
+
+    // Handle different garden options
+    switch (optionId) {
+      case gardenOptions[0].id:
+        if (activeArea.rows <= rows && activeArea.rows <= cols) {
+          setActiveArea({ rows: ++activeArea.rows, cols: ++activeArea.cols })
+        }
+        break
+    }
+
+    dispatch(setMoneyAC(-price))
   }
 
   useEffect(() => {
@@ -100,6 +124,7 @@ export const Home = () => {
                               <BerryGrid
                                 rows={rows}
                                 cols={cols}
+                                activeArea={activeArea}
                                 berryCells={[
                                   { row: 1, col: 2 },
                                   { row: 3, col: 4 },
@@ -115,7 +140,9 @@ export const Home = () => {
                                     </div>
 
                                     <div className={s.grid_main_garden__options__item__bottom}>
-                                      <BaseButton>Купить</BaseButton>
+                                      <BaseButton onClick={() => handleGardenOptionPurchase(i.id, i.price)}>
+                                        Купить
+                                      </BaseButton>
                                       <CoinAmount amount={i.price} />
                                     </div>
                                   </div>

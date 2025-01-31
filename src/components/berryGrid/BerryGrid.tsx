@@ -7,6 +7,7 @@ import s from './BerryGrid.module.scss'
 interface BerryGridProps {
   rows: number
   cols: number
+  activeArea: { rows: number; cols: number }
   berryCells: { row: number; col: number }[]
 }
 
@@ -37,12 +38,15 @@ const generateSpecificCells = (
   return newGrid
 }
 
-const BerryGrid = memo(({ rows, cols, berryCells }: BerryGridProps) => {
-  const [activeArea, setActiveArea] = useState({ rows: 5, cols: 5 })
+const BerryGrid = memo(({ rows, cols, activeArea, berryCells }: BerryGridProps) => {
   const [grid, setGrid] = useState(() =>
     generateSpecificCells(rows, cols, activeArea.rows, activeArea.cols, berryCells)
   )
   const [spriteUrl, setSpriteUrl] = useState('')
+
+  useEffect(() => {
+    setGrid(generateSpecificCells(rows, cols, activeArea.rows, activeArea.cols, berryCells))
+  }, [activeArea.rows, activeArea.cols, rows, cols, berryCells])
 
   useEffect(() => {
     const fetchBerryImage = async () => {

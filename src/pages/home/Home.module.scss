@@ -61,6 +61,10 @@
   transition: all 0.2s linear;
 }
 
+.accordion__bottom_content.opened {
+  margin-bottom: 40px;
+}
+
 .grid_pokemons {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
